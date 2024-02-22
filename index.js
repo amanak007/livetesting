@@ -8,7 +8,7 @@ const db = new pg.Client({
   database: "world",
   password: "maabappa1",
   port: 5432,
-});
+},()=>{console.log("Munna connected")});
 
 const app = express();
 const port = 3000;
@@ -33,7 +33,7 @@ app.use(express.static("public"));
 
 let currentQuestion = {};
 
-// GET home page
+
 app.get("/", async (req, res) => {
   totalCorrect = 0;
   await nextQuestion();
@@ -41,7 +41,6 @@ app.get("/", async (req, res) => {
   res.render("index.ejs", { question: currentQuestion });
 });
 
-// POST a new post
 app.post("/submit", (req, res) => {
   let answer = req.body.answer.trim();
   let isCorrect = false;
